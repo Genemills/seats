@@ -1,0 +1,30 @@
+<!-- 
+<p> <%= image_tag @restaurant.image %></p> -->
+
+
+<h4><%= @restaurant.name %> Information</h4>
+<p>Address: <%= @restaurant.address %></p>
+<p>Telephone: <%= @restaurant.phone_number %></p>
+<p>Capacity: <%= @restaurant.capacity %></p>
+
+
+<h4>Options</h4>
+
+<% if current_user == nil %>
+<%= link_to "Log in", new_session_path %> | <%= link_to "Join as Customer", new_customer_path %> | <%= link_to "Join as Business Owner", new_owner_path %>
+
+<% elsif session[:owner_id] == current_user.id %>
+<li><a href="#"><%= link_to "Home", root_path %></a></li>
+<li><a href="#"><%= link_to "My Profile", owner_path(current_user) %></a></li>
+<li><a href="#"><%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %></a></li>
+
+<% elsif session[:customer_id] == current_user.id %>
+<li><a href="#"><%= link_to "Home", root_path %></a></li>
+<li><a href="#"><%= link_to "My Profile", customer_path(current_user) %></a></li>
+<li><a href="#"><%= link_to "Make Reservation", new_restaurant_reservation_path(@restaurant)%></a></li>
+
+<%else%>
+<li><a href="#"><%= link_to "Home", root_path %></a></li>
+<%end%>
+        
+

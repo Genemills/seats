@@ -1,0 +1,13 @@
+<%= link_to "Restaurants", restaurants_path %> |
+
+<% if current_user == nil %>
+<%= link_to "Log in", new_session_path %> | <%= link_to "Join as Customer", new_customer_path %> | <%= link_to "Join as Business Owner", new_owner_path %>
+<% elsif session[:owner_id] == current_user.id %>  
+<%= link_to "My Profile", owner_path(current_user) %> |
+<%= link_to "Log out", session_path(current_user), method: :delete %> 
+<% elsif session[:customer_id] == current_user.id %> 
+<%= link_to "My Profile", customer_path(current_user) %> |
+<%= link_to "Log out", session_path(current_user), method: :delete %>
+<%end%>
+
+
